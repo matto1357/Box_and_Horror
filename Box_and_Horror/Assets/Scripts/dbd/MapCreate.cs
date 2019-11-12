@@ -7,6 +7,8 @@ public class MapCreate : MonoBehaviour
 {
     [SerializeField] TextAsset textAsset;
     [SerializeField] GameObject mapObject;
+    //ミニマップ用。場所は変更する
+    [SerializeField] GameObject minimap;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +28,23 @@ public class MapCreate : MonoBehaviour
             }
             cnt++;
         }
+
+        
     }
-    
+
+    private void Update()
+    {
+        //マップ表示。書く場所はあとでplayerに行くだろうな
+        if (Input.GetKey(KeyCode.Q))
+        {
+            minimap.SetActive(true);
+        }
+        else
+        {
+            minimap.SetActive(false);
+        }
+    }
+
     private void InstanceFloor(Vector3 pos)
     {
         Instantiate(mapObject, pos, Quaternion.identity, this.transform);
