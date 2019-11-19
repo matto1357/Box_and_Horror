@@ -21,9 +21,10 @@ public class MapCreate : MonoBehaviour
             string[] str = reader.ReadLine().Split(',');
             for (int i = 0;i< str.Length;i++)
             {
-                if (int.Parse(str[i]) != 0)
+                if (int.Parse(str[i]) != 1)
                 {
-                    InstanceFloor(new Vector3(i, 0,cnt));
+                    InstanceFloor(new Vector3(i, 0,cnt),int.Parse(str[i]));
+
                 }
             }
             cnt++;
@@ -45,8 +46,32 @@ public class MapCreate : MonoBehaviour
         }
     }
 
-    private void InstanceFloor(Vector3 pos)
+    private void InstanceFloor(Vector3 pos,int num)
     {
-        Instantiate(mapObject, pos, Quaternion.identity, this.transform);
+        //オブジェクトに持たせるかもしれないし変わる可能性アリ
+        GameObject obj = Instantiate(mapObject, pos, Quaternion.identity, this.transform);
+        switch (num)
+        {
+            
+            case 0:
+                obj.GetComponent<MeshRenderer>().material.color = new Color(1, 1, 1);
+                break;
+            case 2:
+                obj.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0);
+                break;
+            case 3:
+                obj.GetComponent<MeshRenderer>().material.color = new Color(0, 1, 0);
+                break;
+            case -1:
+                obj.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
+                break;
+            case -2:
+                obj.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0);
+                break;
+            case -3:
+                obj.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 1);
+                break;
+                
+        }
     }
 }

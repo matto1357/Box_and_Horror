@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4eeefe7ef1f8b6428f90f6ed05d13c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textAsset: {fileID: 4900000, guid: 7f35ac7940ef2e648b0f0b0578bdd8dd, type: 3}
+  textAsset: {fileID: 4900000, guid: 1260513328610bf4e8c11a6604930853, type: 3}
   mapObject: {fileID: 630400635250917654, guid: 1645df0592838d742aa85a9eca9362c4,
     type: 3}
   minimap: {fileID: 1851847293}
