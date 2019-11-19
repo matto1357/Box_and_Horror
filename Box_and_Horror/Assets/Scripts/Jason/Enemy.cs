@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         HeadTowards(playerObject.transform.position, chasingSpeed, Vector3.zero);
@@ -39,6 +38,7 @@ public class Enemy : MonoBehaviour
         if ((target - transform.position).sqrMagnitude < 1f) 
         {
             Debug.Log("GameOver");
+            //ここで敵がplayerを捕まえたら何々する
             //Do something
             return;
         }

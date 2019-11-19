@@ -16,6 +16,6 @@ public class Camera : MonoBehaviour
     
     void Update()
     {
-        this.transform.position = player.transform.position;
+        this.transform.position = player.transform.position;//これでいいみたい
     }
 }

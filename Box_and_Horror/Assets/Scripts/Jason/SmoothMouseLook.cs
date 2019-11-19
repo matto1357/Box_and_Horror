@@ -7,8 +7,8 @@ public class SmoothMouseLook : MonoBehaviour {
 
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     public RotationAxes axes = RotationAxes.MouseXAndY;
-    public float sensitivityX = 15F;
-    public float sensitivityY = 15F;
+    public float sensitivityX = 15F; //ここはplayerのrotationSpeedを同じ値とする
+    public float sensitivityY = 15F;//上下使わないので無視
 
     public float minimumX = -360F;
     public float maximumX = 360F;
@@ -29,8 +29,10 @@ public class SmoothMouseLook : MonoBehaviour {
 
     Quaternion originalRotation;
 
-    void Update() {
-        if (axes == RotationAxes.MouseXAndY) {
+    void Update() 
+    {
+        if (axes == RotationAxes.MouseXAndY) 
+        {
             rotAverageY = 0f;
             rotAverageX = 0f;
 
@@ -40,17 +42,21 @@ public class SmoothMouseLook : MonoBehaviour {
             rotArrayY.Add(rotationY);
             rotArrayX.Add(rotationX);
 
-            if (rotArrayY.Count >= frameCounter) {
+            if (rotArrayY.Count >= frameCounter) 
+            {
                 rotArrayY.RemoveAt(0);
             }
-            if (rotArrayX.Count >= frameCounter) {
+            if (rotArrayX.Count >= frameCounter)
+            {
                 rotArrayX.RemoveAt(0);
             }
 
-            for (int j = 0; j < rotArrayY.Count; j++) {
+            for (int j = 0; j < rotArrayY.Count; j++)
+            {
                 rotAverageY += rotArrayY[j];
             }
-            for (int i = 0; i < rotArrayX.Count; i++) {
+            for (int i = 0; i < rotArrayX.Count; i++)
+            {
                 rotAverageX += rotArrayX[i];
             }
 
@@ -64,17 +70,21 @@ public class SmoothMouseLook : MonoBehaviour {
             Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
 
             transform.localRotation = originalRotation * xQuaternion * yQuaternion;
-        } else if (axes == RotationAxes.MouseX) {
+        } 
+        else if (axes == RotationAxes.MouseX) 
+        {
             rotAverageX = 0f;
 
             rotationX += Input.GetAxis("Mouse X") * sensitivityX;
 
             rotArrayX.Add(rotationX);
 
-            if (rotArrayX.Count >= frameCounter) {
+            if (rotArrayX.Count >= frameCounter) 
+            {
                 rotArrayX.RemoveAt(0);
             }
-            for (int i = 0; i < rotArrayX.Count; i++) {
+            for (int i = 0; i < rotArrayX.Count; i++)
+            {
                 rotAverageX += rotArrayX[i];
             }
             rotAverageX /= rotArrayX.Count;
@@ -83,17 +93,21 @@ public class SmoothMouseLook : MonoBehaviour {
 
             Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
             transform.localRotation = originalRotation * xQuaternion;
-        } else {
+        } 
+        else 
+        {
             rotAverageY = 0f;
 
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 
             rotArrayY.Add(rotationY);
 
-            if (rotArrayY.Count >= frameCounter) {
+            if (rotArrayY.Count >= frameCounter) 
+            {
                 rotArrayY.RemoveAt(0);
             }
-            for (int j = 0; j < rotArrayY.Count; j++) {
+            for (int j = 0; j < rotArrayY.Count; j++) 
+            {
                 rotAverageY += rotArrayY[j];
             }
             rotAverageY /= rotArrayY.Count;
@@ -105,20 +119,25 @@ public class SmoothMouseLook : MonoBehaviour {
         }
     }
 
-    void Start() {
+    void Start()
+    {
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb)
             rb.freezeRotation = true;
         originalRotation = transform.localRotation;
     }
 
-    public static float ClampAngle(float angle, float min, float max) {
+    public static float ClampAngle(float angle, float min, float max) 
+    {
         angle = angle % 360;
-        if ((angle >= -360F) && (angle <= 360F)) {
-            if (angle < -360F) {
+        if ((angle >= -360F) && (angle <= 360F))
+        {
+            if (angle < -360F) 
+            {
                 angle += 360F;
             }
-            if (angle > 360F) {
+            if (angle > 360F)
+            {
                 angle -= 360F;
             }
         }
