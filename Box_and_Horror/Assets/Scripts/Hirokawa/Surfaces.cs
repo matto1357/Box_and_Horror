@@ -10,6 +10,7 @@ public class Surfaces
 {
     private Vector2Int[] poses;
     private Vector2Int[] convertedPoses;
+    private Vector2Int[] rotatedPoses;
 
     public Vector2Int[] Poses
     {
@@ -32,6 +33,17 @@ public class Surfaces
                 this.convertedPoses = ConvertPoses(this.poses);
             }
             return this.convertedPoses;
+        }
+    }
+    public Vector2Int[] RotatedPoses
+    {
+        get
+        {
+            if(rotatedPoses == null)
+            {
+                this.rotatedPoses = RotatePoses();
+            }
+            return this.rotatedPoses;
         }
     }
     public Vector2Int Size { get; set; }
@@ -74,6 +86,21 @@ public class Surfaces
 
         Size = new Vector2Int(max.x - min.x + 1, max.y - min.y + 1);
 
+        return result;
+    }
+
+    /// <summary>
+    /// 右方向に回転する
+    /// </summary>
+    /// <returns></returns>
+    private Vector2Int[] RotatePoses()
+    {
+        Vector2Int[] result = new Vector2Int[6];
+        for(int i = 0; i < result.Length; i++)
+        {
+            Vector2Int data = convertedPoses[i];
+            result[i] = new Vector2Int(Size.y - 1 - data.y, data.x);
+        }
         return result;
     }
 
