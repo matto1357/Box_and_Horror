@@ -8,29 +8,17 @@ public class MapCreate : MonoBehaviour
     [SerializeField] TextAsset textAsset;
     [SerializeField] GameObject mapObject;
     //ミニマップ用。場所は変更する
+    [SerializeField] GameObject minimapCamera;
     [SerializeField] GameObject minimap;
+
+    GameObject endPosition;
     // Start is called before the first frame update
     void Start()
     {
         //本来ここでtextAssetの読み込み。多分managerから
         //csvの読み込み
-        StreamReader reader = new StreamReader((Application.dataPath + "/Resources/CSV/" + textAsset.name + ".csv"));
-        int cnt = 0;
-        while(reader.Peek() > -1)
-        {
-            string[] str = reader.ReadLine().Split(',');
-            for (int i = 0;i< str.Length;i++)
-            {
-                if (int.Parse(str[i]) != 1)
-                {
-                    InstanceFloor(new Vector3(i, 0,cnt),int.Parse(str[i]));
-
-                }
-            }
-            cnt++;
-        }
-
-        
+        TextAssetReader();
+        //TextAssetReader();
     }
 
     private void Update()
@@ -38,15 +26,44 @@ public class MapCreate : MonoBehaviour
         //マップ表示。書く場所はあとでplayerに行くだろうな
         if (Input.GetKey(KeyCode.Q))
         {
+            minimapCamera.SetActive(true);
             minimap.SetActive(true);
         }
         else
         {
+            minimapCamera.SetActive(false);
             minimap.SetActive(false);
         }
     }
 
-    private void InstanceFloor(Vector3 pos,int num)
+    private void TextAssetReader()
+    {
+        StreamReader reader = new StreamReader((Application.dataPath + "/Resources/CSV/" + textAsset.name + ".csv"));
+        int cnt = 0;
+        int num = 0;
+        GameObject obj = new GameObject();
+        while (reader.Peek() > -1)
+        {
+            string[] str = reader.ReadLine().Split(',');
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (int.Parse(str[i]) != 1)
+                {
+                    InstanceFloor(new Vector3(i, 0, cnt), int.Parse(str[i])).transform.parent = obj.transform;
+
+                }
+            }
+            cnt++;
+            num = str.Length;
+        }
+        minimapCamera.transform.localPosition = new Vector3((float)cnt / 2f, 10, (float)num / 2f);
+        if(endPosition != null)
+        {
+            //Vector3 vec = endPosition.transform.localPosition - ;
+        }
+    }
+
+    private GameObject InstanceFloor(Vector3 pos,int num)
     {
         //オブジェクトに持たせるかもしれないし変わる可能性アリ
         GameObject obj = Instantiate(mapObject, pos, Quaternion.identity, this.transform);
@@ -64,14 +81,23 @@ public class MapCreate : MonoBehaviour
                 break;
             case -1:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
+                //obj.transform.localScale += new Vector3(0,10,0);
                 break;
             case -2:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0);
+                obj.GetComponent<BoxCollider>().size = new Vector3(1, 0.1f, 1);
+                obj.GetComponent<BoxCollider>().center = new Vector3(0,-0.5f,0);
+                //obj.transform.localScale += new Vector3(0, 10, 0);
+                endPosition = obj;
                 break;
             case -3:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 1);
+                obj.GetComponent<BoxCollider>().size = new Vector3(1, 0.1f, 1);
+                obj.GetComponent<BoxCollider>().center = new Vector3(0, -0.5f, 0);
+                //obj.transform.localScale += new Vector3(0, 10, 0);
                 break;
                 
         }
+        return obj;
     }
 }
