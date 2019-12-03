@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Enemy : MonoBehaviour
     public float turnSpeed;
 
     Quaternion targetQuaternion;
+
+    public NavMeshAgent agent;
 
 
     void Start()
@@ -30,7 +33,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        HeadTowards(playerObject.transform.position, chasingSpeed, Vector3.zero);
+        //HeadTowards(playerObject.transform.position, chasingSpeed, Vector3.zero);
+        agent.SetDestination(playerObject.transform.position);
     }
 
     void HeadTowards(Vector3 target,float speed, Vector3 advanceSpeed) 
