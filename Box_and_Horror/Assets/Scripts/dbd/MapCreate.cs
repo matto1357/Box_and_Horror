@@ -12,6 +12,8 @@ public class MapCreate : MonoBehaviour
     [SerializeField] GameObject minimap;
 
     GameObject endPosition;
+
+    [SerializeField] MapController mapController;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class MapCreate : MonoBehaviour
         TextAssetReader();
         //TextAssetReader();
     }
+
 
     private void Update()
     {
@@ -33,6 +36,10 @@ public class MapCreate : MonoBehaviour
         {
             minimapCamera.SetActive(false);
             minimap.SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //なびめっしゅさがし
         }
     }
 
@@ -49,13 +56,15 @@ public class MapCreate : MonoBehaviour
             {
                 if (int.Parse(str[i]) != 1)
                 {
-                    InstanceFloor(new Vector3(i, 0, cnt), int.Parse(str[i])).transform.parent = obj.transform;
-
+                    GameObject a = InstanceFloor(new Vector3(i, 0, cnt), int.Parse(str[i]));
+                    a.transform.parent = obj.transform;
+                    a.name = cnt + ":" + i;
                 }
             }
             cnt++;
             num = str.Length;
         }
+        mapController.SetGlidInfo(new int[2] { cnt, num }, textAsset);
         minimapCamera.transform.localPosition = new Vector3((float)cnt / 2f, 10, (float)num / 2f);
         if(endPosition != null)
         {
@@ -66,7 +75,7 @@ public class MapCreate : MonoBehaviour
     private GameObject InstanceFloor(Vector3 pos,int num)
     {
         //オブジェクトに持たせるかもしれないし変わる可能性アリ
-        GameObject obj = Instantiate(mapObject, pos, Quaternion.identity, this.transform);
+        GameObject obj = Instantiate(mapObject, pos, Quaternion.identity);
         switch (num)
         {
             
@@ -81,23 +90,25 @@ public class MapCreate : MonoBehaviour
                 break;
             case -1:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
-                //obj.transform.localScale += new Vector3(0,10,0);
+                obj.transform.localScale += new Vector3(0,10,0);
                 break;
             case -2:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0);
                 obj.GetComponent<BoxCollider>().size = new Vector3(1, 0.1f, 1);
                 obj.GetComponent<BoxCollider>().center = new Vector3(0,-0.5f,0);
-                //obj.transform.localScale += new Vector3(0, 10, 0);
+                obj.transform.localScale += new Vector3(0, 10, 0);
                 endPosition = obj;
                 break;
             case -3:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 1);
                 obj.GetComponent<BoxCollider>().size = new Vector3(1, 0.1f, 1);
                 obj.GetComponent<BoxCollider>().center = new Vector3(0, -0.5f, 0);
-                //obj.transform.localScale += new Vector3(0, 10, 0);
+                obj.transform.localScale += new Vector3(0, 10, 0);
                 break;
                 
         }
         return obj;
     }
+    
+    
 }
