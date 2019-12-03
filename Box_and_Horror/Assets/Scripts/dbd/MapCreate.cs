@@ -14,6 +14,7 @@ public class MapCreate : MonoBehaviour
     GameObject endPosition;
 
     [SerializeField] MapController mapController;
+    [SerializeField] README _r;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,7 @@ public class MapCreate : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //なびめっしゅさがし
+            _r.enabled = true;
         }
     }
 
@@ -66,6 +68,7 @@ public class MapCreate : MonoBehaviour
         }
         mapController.SetGlidInfo(new int[2] { cnt, num }, textAsset);
         minimapCamera.transform.localPosition = new Vector3((float)cnt / 2f, 10, (float)num / 2f);
+        
         if(endPosition != null)
         {
             //Vector3 vec = endPosition.transform.localPosition - ;
