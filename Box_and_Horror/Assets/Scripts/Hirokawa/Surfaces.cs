@@ -22,6 +22,7 @@ public class Surfaces
                 return;
             }
             this.poses = value;
+            this.convertedPoses = ConvertPoses(this.poses);
         }
     }
     public Vector2Int[] ConvertedPoses
@@ -101,6 +102,7 @@ public class Surfaces
             Vector2Int data = convertedPoses[i];
             result[i] = new Vector2Int(Size.y - 1 - data.y, data.x);
         }
+        Size = new Vector2Int(Size.y, Size.x);
         return result;
     }
 
@@ -109,7 +111,7 @@ public class Surfaces
     /// </summary>
     public Surfaces()
     {
-
+        
     }
 
     /// <summary>
