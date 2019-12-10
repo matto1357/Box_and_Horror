@@ -66,7 +66,7 @@ public class MapCreate : MonoBehaviour
         }
         mapController.SetGlidInfo(new int[2] { cnt, num }, textAsset);
         minimapCamera.transform.localPosition = new Vector3((float)cnt / 2f, 10, (float)num / 2f);
-        _r.enabled = true;
+        _r.UpdateNav();
         if (endPosition != null)
         {
             //Vector3 vec = endPosition.transform.localPosition - ;

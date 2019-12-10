@@ -87,10 +87,7 @@ public class MapController : MonoBehaviour
                 Debug.Log(judge);
                 if (judge)
                 {
-                    for (int i = 0;i<objs.Length;i++)
-                    {
-                        StartCoroutine(MapDeleteCoroutine(objs[i]));
-                    }
+                    StartCoroutine(MapDeleteCoroutine(objs));
                 }
                 else
                 {
@@ -101,28 +98,43 @@ public class MapController : MonoBehaviour
                 }
                 pointNum = 0;
                 vec2 = new Vector2Int[6];
-                objs = new GameObject[6];
             }
         }
         
     }
 
-    IEnumerator MapDeleteCoroutine(GameObject obj)
+    IEnumerator MapDeleteCoroutine(GameObject[] obj)
     {
-        obj.GetComponent<MeshRenderer>().material.color = Color.black;
+        for (int i = 0; i < objs.Length; i++)
+        {
+            obj[i].GetComponent<MeshRenderer>().material.color = Color.black;
+        }
         yield return new WaitForSeconds(0.3f);
-        obj.GetComponent<MeshRenderer>().material.color = Color.red;
+        for (int i = 0; i < objs.Length; i++)
+        {
+            obj[i].GetComponent<MeshRenderer>().material.color = Color.red;
+        }
         yield return new WaitForSeconds(0.3f);
-        obj.GetComponent<MeshRenderer>().material.color = Color.black;
+        for (int i = 0; i < objs.Length; i++)
+        {
+            obj[i].GetComponent<MeshRenderer>().material.color = Color.black;
+        }
         yield return new WaitForSeconds(0.3f);
-        obj.GetComponent<MeshRenderer>().material.color = Color.red;
+        for (int i = 0; i < objs.Length; i++)
+        {
+            obj[i].GetComponent<MeshRenderer>().material.color = Color.red;
+        }
         yield return new WaitForSeconds(0.3f);
-        Destroy(obj);
-        UpdateNavMesh();
+        for (int i = 0; i < objs.Length; i++)
+        {
+            Destroy(objs[i]);
+        }
+        _r.UpdateNav();
+        objs = new GameObject[6];
     }
 
     private void UpdateNavMesh()
     {
-        _r.UpdateNav();
     }
 }
+
