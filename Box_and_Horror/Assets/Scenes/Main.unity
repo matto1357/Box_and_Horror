@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 0}
   player: {fileID: 1594083719}
+  enemy: {fileID: 0}
   _r: {fileID: 1706683944}
 --- !u!4 &988081622
 Transform:
@@ -713,7 +714,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594083719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.7, y: 2.18, z: 3.22}
+  m_LocalPosition: {x: 15.15, y: 2.18, z: 3.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

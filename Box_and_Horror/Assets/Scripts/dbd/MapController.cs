@@ -6,12 +6,15 @@ using System.IO;
 public class MapController : MonoBehaviour
 {
     int[,] glid;
+    public List<int[,]> infometionGlid = new List<int[,]>();
     List<int> pointList = new List<int>();
+
 
     [SerializeField]GameObject obj;
     int pointNum;
 
     [SerializeField] GameObject player;
+    [SerializeField] GameObject enemy;
     [SerializeField] README _r;
     // Start is called before the first frame update
     void Start()
@@ -50,7 +53,6 @@ public class MapController : MonoBehaviour
             }
             cnt++;
         }
-
     }
 
     GameObject[] objs = new GameObject[6];
@@ -133,8 +135,9 @@ public class MapController : MonoBehaviour
         objs = new GameObject[6];
     }
 
-    private void UpdateNavMesh()
+    private void SetCharactorPosition()
     {
+
     }
 }
 
