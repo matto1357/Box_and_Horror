@@ -56,7 +56,7 @@ public class MapCreate : MonoBehaviour
             {
                 if (int.Parse(str[i]) != 1)
                 {
-                    GameObject a = InstanceFloor(new Vector3(i, 0, cnt), int.Parse(str[i]));
+                    GameObject a = InstanceFloor(new Vector3(i * mapObject.transform.localScale.x, 0, cnt * mapObject.transform.localScale.x), int.Parse(str[i]));
                     a.transform.parent = obj.transform;
                     a.name = cnt + ":" + i;
                 }
