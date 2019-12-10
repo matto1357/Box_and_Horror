@@ -9,7 +9,10 @@ public class Player : MonoBehaviour
     public float rotationSpeed = 5.0f; //playerの曲がりの速さ
     public float playerFallvalue = -10.0f; //どこまで落ちたらgameover
 
+    public Transform enemyTrans;
+
     Rigidbody rb;
+    bool isGameOver = false;
 
    
     void Start() 
@@ -20,7 +23,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerMovementUpdate();
-        GameOverUpdate();
+        if(!isGameOver) GameOverUpdate();
         PlayerRotate();
     }
 
@@ -74,9 +77,18 @@ public class Player : MonoBehaviour
     {
         if(this.transform.position.y < playerFallvalue) 
         {
+            isGameOver = true;
             //Debug.Log("gameover");
             //Do something here
             //落ちたら何々する
+        }
+
+        float dis = Vector3.Distance(enemyTrans.position, transform.position);
+        if(dis < 1.3f) 
+        {
+            isGameOver = true;
+            Debug.Log("gameover");
+            //Do something here
         }
     }
 }
