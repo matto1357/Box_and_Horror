@@ -14,10 +14,12 @@ public class MapCreate : MonoBehaviour
     GameObject endPosition;
 
     [SerializeField] MapController mapController;
-    [SerializeField] README _r;
+    README _r;
+    [SerializeField] Material mat;
     // Start is called before the first frame update
     void Start()
     {
+        _r = GetComponent<README>();
         //本来ここでtextAssetの読み込み。多分managerから
         //csvの読み込み
         TextAssetReader();
@@ -38,11 +40,7 @@ public class MapCreate : MonoBehaviour
             minimapCamera.SetActive(false);
             minimap.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //なびめっしゅさがし
-            _r.enabled = true;
-        }
+        
     }
 
     private void TextAssetReader()
@@ -68,8 +66,8 @@ public class MapCreate : MonoBehaviour
         }
         mapController.SetGlidInfo(new int[2] { cnt, num }, textAsset);
         minimapCamera.transform.localPosition = new Vector3((float)cnt / 2f, 10, (float)num / 2f);
-        
-        if(endPosition != null)
+        _r.enabled = true;
+        if (endPosition != null)
         {
             //Vector3 vec = endPosition.transform.localPosition - ;
         }
@@ -94,12 +92,14 @@ public class MapCreate : MonoBehaviour
             case -1:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
                 obj.transform.localScale += new Vector3(0,10,0);
+                obj.GetComponent<MeshRenderer>().material = mat;
                 break;
             case -2:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0);
                 obj.GetComponent<BoxCollider>().size = new Vector3(1, 0.1f, 1);
                 obj.GetComponent<BoxCollider>().center = new Vector3(0,-0.5f,0);
                 obj.transform.localScale += new Vector3(0, 10, 0);
+                obj.GetComponent<MeshRenderer>().material = mat;
                 endPosition = obj;
                 break;
             case -3:
@@ -107,6 +107,7 @@ public class MapCreate : MonoBehaviour
                 obj.GetComponent<BoxCollider>().size = new Vector3(1, 0.1f, 1);
                 obj.GetComponent<BoxCollider>().center = new Vector3(0, -0.5f, 0);
                 obj.transform.localScale += new Vector3(0, 10, 0);
+                obj.GetComponent<MeshRenderer>().material = mat;
                 break;
                 
         }

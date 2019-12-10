@@ -19,4 +19,9 @@ public class README : MonoBehaviour
         surface.BuildNavMesh();
     }
 
+    public void UpdateNav()
+    {
+        surface.BuildNavMesh();
+    }
+
 }
