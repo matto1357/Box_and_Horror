@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameStart.unity
     guid: 3991add8530998546820a467c86fc155
+  - enabled: 0
+    path: Assets/Scenes/Jason.unity
+    guid: 7708d0cffa474294cb72be7ddcc88b41
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 9aeecd1b29c0da14d9ed3e575d8b47f9
