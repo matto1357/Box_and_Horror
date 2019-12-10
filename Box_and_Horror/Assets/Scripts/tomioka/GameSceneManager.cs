@@ -8,6 +8,6 @@ public class GameSceneManager : MonoBehaviour
     public void StartButtonClick()
     {
         //メインシーンへ飛ぶ
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("Main");
     }
 }
