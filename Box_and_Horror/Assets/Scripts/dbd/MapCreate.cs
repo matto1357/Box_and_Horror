@@ -56,7 +56,7 @@ public class MapCreate : MonoBehaviour
             {
                 if (int.Parse(str[i]) != 1)
                 {
-                    GameObject a = InstanceFloor(new Vector3(i * mapObject.transform.localScale.x, 0, cnt * mapObject.transform.localScale.x), int.Parse(str[i]),new int[2]{i,cnt});
+                    GameObject a = InstanceFloor(new Vector3(i * mapObject.transform.localScale.x, 0, cnt * mapObject.transform.localScale.x), int.Parse(str[i]),new int[]{i,cnt});
                     a.transform.parent = obj.transform;
                     a.name = cnt + ":" + i;
                 }
@@ -65,6 +65,7 @@ public class MapCreate : MonoBehaviour
             num = str.Length;
         }
         mapController.SetGlidInfo(new int[2] { cnt, num }, textAsset);
+        mapController.Init();
         minimapCamera.transform.localPosition = new Vector3((float)cnt / 2f, 10, (float)num / 2f);
         _r.UpdateNav();
         if (endPosition != null)
@@ -73,7 +74,7 @@ public class MapCreate : MonoBehaviour
         }
     }
 
-    private GameObject InstanceFloor(Vector3 pos,int num,int[,] nums)
+    private GameObject InstanceFloor(Vector3 pos,int num,int[] nums)
     {
         //オブジェクトに持たせるかもしれないし変わる可能性アリ
         GameObject obj = Instantiate(mapObject, pos, Quaternion.identity);
@@ -85,11 +86,13 @@ public class MapCreate : MonoBehaviour
                 break;
             case 2:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0);
-                mapController.infometionGlid.Add(nums);
+                mapController.infometionGlid.Add(new Vector3(nums[0],1,nums[1]));
+                mapController.pointList.Add(num);
                 break;
             case 3:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0, 1, 0);
-                mapController.infometionGlid.Add(nums);
+                mapController.infometionGlid.Add(new Vector3(nums[0],1, nums[1]));
+                mapController.pointList.Add(num);
                 break;
             case -1:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
@@ -97,12 +100,14 @@ public class MapCreate : MonoBehaviour
                 obj.GetComponent<MeshRenderer>().material = mat;
                 break;
             case -2:
-                obj.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0);
-                obj.GetComponent<BoxCollider>().size = new Vector3(1, 0.1f, 1);
-                obj.GetComponent<BoxCollider>().center = new Vector3(0,-0.5f,0);
-                obj.transform.localScale += new Vector3(0, 10, 0);
-                obj.GetComponent<MeshRenderer>().material = mat;
-                mapController.infometionGlid.Add(nums);
+                obj.GetComponent<BoxCollider>().size = new Vector3(1,2,1);
+                var col = obj.AddComponent<BoxCollider>();
+                col.center += new Vector3(0, 1, 0);
+                col.isTrigger = true;
+                obj.AddComponent<ExitPoint>();
+                obj.transform.localScale = new Vector3(obj.transform.localScale.x,0.1f,obj.transform.localScale.z);
+                mapController.infometionGlid.Add(new Vector3(nums[0],1, nums[1]));
+                mapController.pointList.Add(num);
                 endPosition = obj;
                 break;
             case -3:
@@ -111,7 +116,8 @@ public class MapCreate : MonoBehaviour
                 obj.GetComponent<BoxCollider>().center = new Vector3(0, -0.5f, 0);
                 obj.transform.localScale += new Vector3(0, 10, 0);
                 obj.GetComponent<MeshRenderer>().material = mat;
-                mapController.infometionGlid.Add(nums);
+                mapController.infometionGlid.Add(new Vector3(nums[0],1, nums[1]));
+                mapController.pointList.Add(num);
                 break;
                 
         }

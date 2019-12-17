@@ -287,10 +287,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ae1d1469bc8ab40a22528f6938631a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infometionGlid: []
+  pointList: 
   obj: {fileID: 0}
   player: {fileID: 1594083719}
   enemy: {fileID: 0}
   _r: {fileID: 1706683944}
+  masuObjScale: 2
 --- !u!4 &988081622
 Transform:
   m_ObjectHideFlags: 0

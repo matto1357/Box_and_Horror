@@ -6,8 +6,8 @@ using System.IO;
 public class MapController : MonoBehaviour
 {
     int[,] glid;
-    public List<int[,]> infometionGlid = new List<int[,]>();
-    List<int> pointList = new List<int>();
+    public List<Vector3> infometionGlid = new List<Vector3>();
+    public List<int> pointList = new List<int>();
 
 
     [SerializeField]GameObject obj;
@@ -16,6 +16,7 @@ public class MapController : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject enemy;
     [SerializeField] README _r;
+    [SerializeField]private int masuObjScale;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,29 @@ public class MapController : MonoBehaviour
         }
         
     }
+    public void Init()
+    {
+        bool trig = true;
+        int cnt = 0;
+        while (cnt < pointList.Count)
+        {
+            switch (pointList[cnt])
+            {
+                case 2:
+                    Debug.Log(cnt);
+                    MovePlayer(cnt);
+                    break;
+                case -3:
+                    Debug.Log(cnt);
+                    Text(cnt);
+                    break;
+
+            }
+            cnt++;
+        }
+
+    }
+
 
     /// <summary>
     /// なんか
@@ -133,6 +157,23 @@ public class MapController : MonoBehaviour
         }
         _r.UpdateNav();
         objs = new GameObject[6];
+    }
+
+    private void MovePlayer(int cnt)
+    {
+        Debug.Log(infometionGlid[cnt]*masuObjScale);
+        player.transform.localPosition = infometionGlid[cnt]*masuObjScale;
+    }
+
+    private void Text(int cnt)
+    {
+        var text = new GameObject();
+        text.AddComponent<TextMesh>().text = "箱 * 2個";
+        text.GetComponent<TextMesh>().fontSize = 50;
+        text.transform.localPosition = infometionGlid[cnt] * masuObjScale;
+        text.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        Debug.Log(text.transform.localPosition);
+        //向きがあってないから直してね
     }
 
     private void SetCharactorPosition()
