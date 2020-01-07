@@ -8,15 +8,21 @@ public class MapController : MonoBehaviour
     int[,] glid;
     public List<Vector3> infometionGlid = new List<Vector3>();
     public List<int> pointList = new List<int>();
-
+    private int[] size = new int[2];
 
     [SerializeField]GameObject obj;
     int pointNum;
+    [SerializeField] MapCreate map;
+
+    int boxCnt;
 
     [SerializeField] GameObject player;
+    [SerializeField] GameObject camera;
     [SerializeField] GameObject enemy;
     [SerializeField] README _r;
     [SerializeField]private int masuObjScale;
+
+    public GameObject parentObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,9 +80,11 @@ public class MapController : MonoBehaviour
                 {
                     glid[cnt, i] = int.Parse(str[i]);
                 }
+                size[1] = i+1;
             }
             cnt++;
         }
+        size[0] = cnt;
     }
 
     GameObject[] objs = new GameObject[6];
@@ -156,6 +164,8 @@ public class MapController : MonoBehaviour
             Destroy(objs[i]);
         }
         _r.UpdateNav();
+        player.GetComponent<Player>().boxCnt++;
+        Debug.Log(player.GetComponent<Player>().boxCnt);
         objs = new GameObject[6];
     }
 
@@ -163,16 +173,36 @@ public class MapController : MonoBehaviour
     {
         Debug.Log(infometionGlid[cnt]*masuObjScale);
         player.transform.localPosition = infometionGlid[cnt]*masuObjScale;
+        player.transform.LookAt(new Vector3(-size[0] / 2 * masuObjScale, player.transform.position.y, -size[1] / 2 * masuObjScale));
+        camera.transform.localRotation = player.transform.localRotation;
+
     }
 
     private void Text(int cnt)
     {
         var text = new GameObject();
-        text.AddComponent<TextMesh>().text = "箱 * 2個";
+        text.transform.parent = parentObj.transform;
+        text.AddComponent<TextMesh>().text = "箱 * "+map.assets[0].boxCnt+"個";
         text.GetComponent<TextMesh>().fontSize = 50;
         text.transform.localPosition = infometionGlid[cnt] * masuObjScale;
+        Debug.Log(infometionGlid[cnt]);
         text.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-        Debug.Log(text.transform.localPosition);
+        if (infometionGlid[cnt].x ==0)
+        {
+            text.transform.Rotate(new Vector3(0,270,0));
+        }
+        else if(infometionGlid[cnt].x == size[0] - 1)
+        {
+            text.transform.Rotate(new Vector3(0, 90, 0));
+        }
+        else if (infometionGlid[cnt].z == 0)
+        {
+            text.transform.Rotate(new Vector3(0, 180, 0));
+        }
+        else if(infometionGlid[cnt].z == size[1] -1)
+        {
+            text.transform.Rotate(new Vector3(0, 0, 0));
+        }
         //向きがあってないから直してね
     }
 

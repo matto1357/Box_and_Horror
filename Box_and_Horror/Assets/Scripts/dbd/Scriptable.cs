@@ -7,5 +7,5 @@ public class Scriptable : ScriptableObject
 {
     [Header("なんのステージを利用するのかな？")]
     [SerializeField]
-    TextAsset[] assets;
+    public ScriptableObject[] assets;
 }

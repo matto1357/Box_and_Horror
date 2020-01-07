@@ -290,8 +290,10 @@ MonoBehaviour:
   infometionGlid: []
   pointList: 
   obj: {fileID: 0}
+  map: {fileID: 1706683941}
   player: {fileID: 1594083719}
-  enemy: {fileID: 0}
+  camera: {fileID: 1980662306}
+  enemy: {fileID: 1264018260}
   _r: {fileID: 1706683944}
   masuObjScale: 2
 --- !u!4 &988081622
@@ -614,7 +616,7 @@ GameObject:
   - component: {fileID: 1594083720}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -647,6 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8458f3aa9bf1d8a4fbfe3576ffd748e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxCnt: 0
   movementSpeed: 5
   rotationSpeed: 5
   playerFallvalue: -10
@@ -754,7 +757,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4eeefe7ef1f8b6428f90f6ed05d13c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textAsset: {fileID: 4900000, guid: 2bbd820bc3163df48a3ce6432fa151d0, type: 3}
+  assets:
+  - {fileID: 11400000, guid: 86d171e3c1fe3a746b624cf28c91c0f1, type: 2}
+  - {fileID: 11400000, guid: c080d2e4a71fe344bb1ff9e07a71cb66, type: 2}
   mapObject: {fileID: 630400635250917654, guid: 1645df0592838d742aa85a9eca9362c4,
     type: 3}
   minimapCamera: {fileID: 177358592}

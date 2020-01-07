@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int boxCnt;
 
     public float movementSpeed = 5.0f; //playerの速さ
     public float rotationSpeed = 5.0f; //playerの曲がりの速さ
