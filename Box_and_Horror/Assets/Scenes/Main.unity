@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 66897865}
-  m_IndirectSpecularColor: {r: 0.43633178, g: 0.4747122, b: 0.5147116, a: 1}
+  m_IndirectSpecularColor: {r: 0.4363283, g: 0.47471118, b: 0.514713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -143,7 +143,7 @@ PrefabInstance:
     - target: {fileID: 7571428629561930778, guid: 3cb9fbc2c77cf9d4f92e16801a9c9d92,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7571428629561930778, guid: 3cb9fbc2c77cf9d4f92e16801a9c9d92,
         type: 3}
@@ -168,7 +168,7 @@ PrefabInstance:
     - target: {fileID: 7571428629561930778, guid: 3cb9fbc2c77cf9d4f92e16801a9c9d92,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7571428629561930778, guid: 3cb9fbc2c77cf9d4f92e16801a9c9d92,
         type: 3}
@@ -250,7 +250,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 3584
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: c0db2e6eda8462e45b144226eb1ddfc3, type: 2}
   m_TargetDisplay: 0
@@ -327,7 +327,7 @@ PrefabInstance:
     - target: {fileID: 8103186193795127774, guid: fac1d41c28be1fe459e647df640a9b28,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8103186193795127774, guid: fac1d41c28be1fe459e647df640a9b28,
         type: 3}
@@ -469,7 +469,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1350199883
 GameObject:
@@ -590,7 +590,7 @@ PrefabInstance:
     - target: {fileID: 8103186193795127774, guid: fac1d41c28be1fe459e647df640a9b28,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8103186193795127774, guid: fac1d41c28be1fe459e647df640a9b28,
         type: 3}
@@ -807,13 +807,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594083719}
-  m_LocalRotation: {x: 0, y: -0.89879405, z: 0, w: 0.4383712}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.15, y: 2.18, z: 3.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1980662311}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: -128, z: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1706683940
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,8 +847,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assets:
-  - {fileID: 11400000, guid: c080d2e4a71fe344bb1ff9e07a71cb66, type: 2}
   - {fileID: 11400000, guid: 86d171e3c1fe3a746b624cf28c91c0f1, type: 2}
+  - {fileID: 11400000, guid: c080d2e4a71fe344bb1ff9e07a71cb66, type: 2}
   mapObject: {fileID: 630400635250917654, guid: 1645df0592838d742aa85a9eca9362c4,
     type: 3}
   minimapCamera: {fileID: 177358592}
@@ -1222,7 +1223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axes: 0
-  sensitivityX: 5
+  sensitivityX: 0
   sensitivityY: 5
   minimumX: -360
   maximumX: 360
@@ -1299,13 +1300,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980662306}
-  m_LocalRotation: {x: -0, y: -0.89879405, z: -0, w: 0.4383712}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1719284004}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1594083725}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -128, z: 0}
 --- !u!1 &2138458653
 GameObject:
@@ -1337,7 +1338,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2138458655
 MonoBehaviour:
