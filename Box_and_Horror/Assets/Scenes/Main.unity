@@ -296,6 +296,7 @@ MonoBehaviour:
   enemy: {fileID: 1264018260}
   _r: {fileID: 1706683944}
   masuObjScale: 2
+  parentObj: {fileID: 0}
 --- !u!4 &988081622
 Transform:
   m_ObjectHideFlags: 0
@@ -653,6 +654,7 @@ MonoBehaviour:
   movementSpeed: 5
   rotationSpeed: 5
   playerFallvalue: -10
+  enemyTrans: {fileID: 1264018267}
 --- !u!136 &1594083722
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -766,6 +768,7 @@ MonoBehaviour:
   minimap: {fileID: 1851847293}
   mapController: {fileID: 988081621}
   mat: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  mapCnt: 0
 --- !u!4 &1706683942
 Transform:
   m_ObjectHideFlags: 0
