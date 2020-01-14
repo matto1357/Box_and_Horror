@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     {
         //HeadTowards(playerObject.transform.position, chasingSpeed, Vector3.zero);
         agent.SetDestination(playerObject.transform.position);
+        //CheckDistance();
     }
 
     void HeadTowards(Vector3 target,float speed, Vector3 advanceSpeed) 
@@ -53,5 +54,16 @@ public class Enemy : MonoBehaviour
             targetQuaternion = Quaternion.LookRotation(moveSpeed, Vector3.up);
         }
         transform.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
+    }
+
+    void CheckDistance() 
+    {
+        float dis = Vector3.Distance(playerObject.transform.position, transform.position);
+        Debug.Log(dis);
+        if (dis <1.0f) 
+        {
+            agent.Stop();
+            Debug.Log("weee");
+        }
     }
 }
