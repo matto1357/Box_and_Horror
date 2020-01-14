@@ -5,9 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
-    public void StartButtonClick()
+    public void ButtonClick()
     {
-        //メインシーンへ飛ぶ
-        SceneManager.LoadScene("");
+        if (SceneManager.GetActiveScene().name == "GameStart")
+        {
+            //メインシーンへ飛ぶ
+            SceneManager.LoadScene("");
+        }
+        if (SceneManager.GetActiveScene().name == "GameClear")
+        {
+            //スタートシーンへ飛ぶ
+            SceneManager.LoadScene("GameStart");
+        }
+        if (SceneManager.GetActiveScene().name == "GameOver")
+        {
+            //スタートシーンへ飛ぶ
+            SceneManager.LoadScene("GameStart");
+        }
+
     }
 }
