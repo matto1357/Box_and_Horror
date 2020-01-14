@@ -123,7 +123,7 @@ public class MapController : MonoBehaviour
                 {
                     StartCoroutine(MapDeleteCoroutine(objs));
                     //はことった
-
+                    EnemySpawn.instance.SpawnEnemy(new Vector3(10,1.6f,10),player.GetComponent<Player>().boxCnt);
                 }
                 else
                 {
@@ -165,18 +165,19 @@ public class MapController : MonoBehaviour
         {
             Destroy(objs[i]);
         }
-        _r.UpdateNav();
         player.GetComponent<Player>().boxCnt++;
         Debug.Log(player.GetComponent<Player>().boxCnt);
         objs = new GameObject[6];
+        yield return new WaitForSeconds(0.1f);
+        _r.UpdateNav();
     }
 
     private void MovePlayer(int cnt)
     {
         Debug.Log(infometionGlid[cnt]*masuObjScale);
         player.transform.localPosition = infometionGlid[cnt]*masuObjScale;
-        player.transform.LookAt(new Vector3(-size[0] / 2 * masuObjScale, player.transform.position.y, -size[1] / 2 * masuObjScale));
-        camera.transform.localRotation = player.transform.localRotation;
+        //player.transform.LookAt(new Vector3(-size[0] / 2 * masuObjScale, player.transform.position.y, -size[1] / 2 * masuObjScale));
+        //camera.transform.localRotation = player.transform.localRotation;
 
     }
 
