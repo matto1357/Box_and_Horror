@@ -7,21 +7,34 @@ public class GameSceneManager : MonoBehaviour
 {
     public void ButtonClick()
     {
-        if (SceneManager.GetActiveScene().name == "GameStart")
+        switch (SceneManager.GetActiveScene().name)
         {
-            //メインシーンへ飛ぶ
-            SceneManager.LoadScene("Main");
-        }
-        if (SceneManager.GetActiveScene().name == "GameClear")
-        {
-            //スタートシーンへ飛ぶ
-            SceneManager.LoadScene("GameStart");
-        }
-        if (SceneManager.GetActiveScene().name == "GameOver")
-        {
-            //スタートシーンへ飛ぶ
-            SceneManager.LoadScene("GameStart");
-        }
+            case "GameStart":
+                //メインシーンへ飛ぶ
+                SceneManager.LoadScene("Main");
+                break;
 
+            case "GameClear":
+                //スタートシーンへ飛ぶ
+                SceneManager.LoadScene("GameStart");
+                break;
+
+            case "GameOver":
+                //スタートシーンへ飛ぶ
+                SceneManager.LoadScene("GameStart");
+                break;
+        }
+    }
+
+    public static void GameOver()
+    {
+        //ゲームオーバーシーンへ飛ぶ
+        SceneManager.LoadScene("GameOver");
+    }
+
+    public static void GameClear()
+    {
+        //ゲームクリアシーンへ飛ぶ
+        SceneManager.LoadScene("GameClear");
     }
 }
