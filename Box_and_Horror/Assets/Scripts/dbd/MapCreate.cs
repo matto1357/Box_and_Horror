@@ -135,6 +135,7 @@ public class MapCreate : MonoBehaviour
     public void ReLoadMap()
     {
         mapCnt++;
+        mapController.parentObj.SetActive(false);
         TextAssetReader();
     }
 

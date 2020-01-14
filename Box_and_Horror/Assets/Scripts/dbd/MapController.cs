@@ -122,6 +122,8 @@ public class MapController : MonoBehaviour
                 if (judge)
                 {
                     StartCoroutine(MapDeleteCoroutine(objs));
+                    //はことった
+
                 }
                 else
                 {
@@ -184,6 +186,7 @@ public class MapController : MonoBehaviour
         text.transform.parent = parentObj.transform;
         text.AddComponent<TextMesh>().text = "箱 * "+map.assets[0].boxCnt+"個";
         text.GetComponent<TextMesh>().fontSize = 50;
+        text.AddComponent<StageText>();
         text.transform.localPosition = infometionGlid[cnt] * masuObjScale;
         Debug.Log(infometionGlid[cnt]);
         text.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
