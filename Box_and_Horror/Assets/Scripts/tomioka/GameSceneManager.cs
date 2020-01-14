@@ -10,7 +10,7 @@ public class GameSceneManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "GameStart")
         {
             //メインシーンへ飛ぶ
-            SceneManager.LoadScene("");
+            SceneManager.LoadScene("Main");
         }
         if (SceneManager.GetActiveScene().name == "GameClear")
         {
