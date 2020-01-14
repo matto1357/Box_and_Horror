@@ -16,7 +16,7 @@ public class README : MonoBehaviour
     {
         //マップ作った後これ入れる
         //床一部消えた時もこれでアップデートする
-        surface.BuildNavMesh();
+        //surface.BuildNavMesh();
     }
 
     public void UpdateNav()
