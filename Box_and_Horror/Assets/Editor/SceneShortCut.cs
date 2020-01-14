@@ -5,6 +5,7 @@ using UnityEngine;
 public enum SceneName
 {
     none = -1,
+    DeploymentBoxTest,
 }
 
 public class SceneShortCut : Editor
@@ -16,16 +17,16 @@ public class SceneShortCut : Editor
         return scenePath + scene.ToString() + ".unity";
     }
 
-/*
-    [MenuItem("SceneShortCuts/2D_NotesTest")]
+
+    [MenuItem("SceneShortCuts/DeploymentBoxTest")]
     static public void Open2D_NotesTestScene()
     {
         //セーブ確認
         if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
         {
             // シーン遷移
-            EditorSceneManager.OpenScene(GetScenePath(SceneName.NotesTest_2D));
+            EditorSceneManager.OpenScene(GetScenePath(SceneName.DeploymentBoxTest));
         }
     }
-*/
+
 }
