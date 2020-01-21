@@ -2,24 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class EnemySpawn : SingletonMonoBehaviour<EnemySpawn>
 {
-    public GameObject enemy1;
-    public GameObject enemy2;
-    public GameObject enemy3;
+    public GameObject[] enemy;
 
-    public void SpawnEnemy1(Vector3 position) 
+    public void SpawnEnemy(Vector3 position,int i) 
     {
-        Instantiate(enemy1, position, Quaternion.identity);
+        Instantiate(enemy[i], position, Quaternion.identity);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetEnemy();
     }
 
-    public void SpawnEnemy2(Vector3 position) 
-    {
-        Instantiate(enemy2, position, Quaternion.identity);
-    }
-
-    public void SpawnEnemy3(Vector3 position) 
-    {
-        Instantiate(enemy3, position, Quaternion.identity);
-    }
 }

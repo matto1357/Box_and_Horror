@@ -19,6 +19,6 @@ public class ExitPoint : MonoBehaviour
             return;
         }
         Debug.Log("clear");
-        map.ReLoadMap();
+        map.ReLoadMap(true);
     }
 }
