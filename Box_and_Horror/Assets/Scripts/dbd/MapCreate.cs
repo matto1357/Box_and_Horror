@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+using UnityEngine.SceneManagement;
+
 public class MapCreate : MonoBehaviour
 {
     public MapData[] assets;
@@ -132,10 +134,18 @@ public class MapCreate : MonoBehaviour
     }
 
     public int mapCnt = 0;
-    public void ReLoadMap()
+    public void ReLoadMap(bool trig)
     {
-        mapCnt++;
-        TextAssetReader();
+        if (trig)mapCnt++;
+        if (mapCnt >= assets.Length)
+        {
+            SceneManager.LoadScene("GameClear");
+        }
+        else
+        {
+            mapController.parentObj.SetActive(false);
+            TextAssetReader();
+        }
     }
 
 }

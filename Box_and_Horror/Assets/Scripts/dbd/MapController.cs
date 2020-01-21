@@ -29,12 +29,43 @@ public class MapController : MonoBehaviour
         
     }
 
+    [SerializeField] Material[] mat;
+    [SerializeField] Material defaultmat;
+    GameObject lastObj;
     // Update is called once per frame
     void Update()
     {
+        //マウスクリックでのマップ編集
+        Ray ray = new Ray(player.transform.position, new Vector3(0, -10, 0));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 10f))
+        {
+            if(hit.transform.gameObject != lastObj && lastObj != null)
+            {
+                lastObj.GetComponent<MeshRenderer>().material = defaultmat;
+                if (lastObj.transform.GetComponent<Yuka>().trig)
+                {
+                    lastObj.GetComponent<MeshRenderer>().material.color = Color.red;
+                }
+            }
+            if (hit.transform.GetComponent<Yuka>().trig)
+            {
+                hit.transform.GetComponent<MeshRenderer>().material = mat[0];
+            }
+            else
+            {
+                hit.transform.GetComponent<MeshRenderer>().material = mat[1];
+            }
+            lastObj = hit.transform.gameObject;
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Point();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            map.ReLoadMap(false);
         }
         
     }
@@ -109,6 +140,7 @@ public class MapController : MonoBehaviour
             }
             objs[pointNum] = hit.collider.gameObject;
             hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            hit.transform.GetComponent<Yuka>().trig = true;
             vec2[pointNum] = new Vector2Int(int.Parse(str[0]), int.Parse(str[1]));
 
             pointNum++;
@@ -122,12 +154,15 @@ public class MapController : MonoBehaviour
                 if (judge)
                 {
                     StartCoroutine(MapDeleteCoroutine(objs));
+                    //はことった
+                    EnemySpawn.instance.SpawnEnemy(new Vector3(10,1.6f,10),player.GetComponent<Player>().boxCnt);
                 }
                 else
                 {
                     for (int i = 0; i < objs.Length; i++)
                     {
                         objs[i].GetComponent<MeshRenderer>().material.color = Color.white;
+                        objs[i].transform.GetComponent<Yuka>().trig = false;
                     }
                 }
                 pointNum = 0;
@@ -141,6 +176,7 @@ public class MapController : MonoBehaviour
     {
         for (int i = 0; i < objs.Length; i++)
         {
+            objs[i].transform.GetComponent<Yuka>().trig = false;
             obj[i].GetComponent<MeshRenderer>().material.color = Color.black;
         }
         yield return new WaitForSeconds(0.3f);
@@ -163,18 +199,19 @@ public class MapController : MonoBehaviour
         {
             Destroy(objs[i]);
         }
-        _r.UpdateNav();
         player.GetComponent<Player>().boxCnt++;
         Debug.Log(player.GetComponent<Player>().boxCnt);
         objs = new GameObject[6];
+        yield return new WaitForSeconds(0.1f);
+        _r.UpdateNav();
     }
 
     private void MovePlayer(int cnt)
     {
         Debug.Log(infometionGlid[cnt]*masuObjScale);
         player.transform.localPosition = infometionGlid[cnt]*masuObjScale;
-        player.transform.LookAt(new Vector3(-size[0] / 2 * masuObjScale, player.transform.position.y, -size[1] / 2 * masuObjScale));
-        camera.transform.localRotation = player.transform.localRotation;
+        //player.transform.LookAt(new Vector3(-size[0] / 2 * masuObjScale, player.transform.position.y, -size[1] / 2 * masuObjScale));
+        //camera.transform.localRotation = player.transform.localRotation;
 
     }
 
@@ -184,6 +221,7 @@ public class MapController : MonoBehaviour
         text.transform.parent = parentObj.transform;
         text.AddComponent<TextMesh>().text = "箱 * "+map.assets[0].boxCnt+"個";
         text.GetComponent<TextMesh>().fontSize = 50;
+        text.AddComponent<StageText>();
         text.transform.localPosition = infometionGlid[cnt] * masuObjScale;
         Debug.Log(infometionGlid[cnt]);
         text.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
