@@ -26,6 +26,12 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+    public static void GameStart()
+    {
+        //スタートシーンへ飛ぶ
+        SceneManager.LoadScene("GameStart");
+    }
+
     public static void GameOver()
     {
         //ゲームオーバーシーンへ飛ぶ
