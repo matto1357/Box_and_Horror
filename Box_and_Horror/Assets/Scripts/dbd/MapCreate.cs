@@ -134,10 +134,10 @@ public class MapCreate : MonoBehaviour
     }
 
     public int mapCnt = 0;
-    public void ReLoadMap()
+    public void ReLoadMap(bool trig)
     {
-        mapCnt++;
-        if(mapCnt >= assets.Length)
+        if (trig)mapCnt++;
+        if (mapCnt >= assets.Length)
         {
             SceneManager.LoadScene("GameClear");
         }

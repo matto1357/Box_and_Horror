@@ -36,6 +36,11 @@ public class MapController : MonoBehaviour
         {
             Point();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            map.ReLoadMap(false);
+        }
         
     }
     public void Init()
