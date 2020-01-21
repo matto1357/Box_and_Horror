@@ -29,9 +29,35 @@ public class MapController : MonoBehaviour
         
     }
 
+    [SerializeField] Material[] mat;
+    [SerializeField] Material defaultmat;
+    GameObject lastObj;
     // Update is called once per frame
     void Update()
     {
+        //マウスクリックでのマップ編集
+        Ray ray = new Ray(player.transform.position, new Vector3(0, -10, 0));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 10f))
+        {
+            if(hit.transform.gameObject != lastObj && lastObj != null)
+            {
+                lastObj.GetComponent<MeshRenderer>().material = defaultmat;
+                if (lastObj.transform.GetComponent<Yuka>().trig)
+                {
+                    lastObj.GetComponent<MeshRenderer>().material.color = Color.red;
+                }
+            }
+            if (hit.transform.GetComponent<Yuka>().trig)
+            {
+                hit.transform.GetComponent<MeshRenderer>().material = mat[0];
+            }
+            else
+            {
+                hit.transform.GetComponent<MeshRenderer>().material = mat[1];
+            }
+            lastObj = hit.transform.gameObject;
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Point();
@@ -114,6 +140,7 @@ public class MapController : MonoBehaviour
             }
             objs[pointNum] = hit.collider.gameObject;
             hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            hit.transform.GetComponent<Yuka>().trig = true;
             vec2[pointNum] = new Vector2Int(int.Parse(str[0]), int.Parse(str[1]));
 
             pointNum++;
@@ -135,6 +162,7 @@ public class MapController : MonoBehaviour
                     for (int i = 0; i < objs.Length; i++)
                     {
                         objs[i].GetComponent<MeshRenderer>().material.color = Color.white;
+                        objs[i].transform.GetComponent<Yuka>().trig = false;
                     }
                 }
                 pointNum = 0;
@@ -148,6 +176,7 @@ public class MapController : MonoBehaviour
     {
         for (int i = 0; i < objs.Length; i++)
         {
+            objs[i].transform.GetComponent<Yuka>().trig = false;
             obj[i].GetComponent<MeshRenderer>().material.color = Color.black;
         }
         yield return new WaitForSeconds(0.3f);
