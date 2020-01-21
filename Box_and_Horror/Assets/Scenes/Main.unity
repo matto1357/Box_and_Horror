@@ -457,6 +457,10 @@ MonoBehaviour:
   _r: {fileID: 1706683944}
   masuObjScale: 2
   parentObj: {fileID: 0}
+  mat:
+  - {fileID: 2100000, guid: 950f924195e37834dba48971f1e5e8dd, type: 2}
+  - {fileID: 2100000, guid: dfdc7a80f498af746bef1179cbe565ad, type: 2}
+  defaultmat: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!4 &988081622
 Transform:
   m_ObjectHideFlags: 0
