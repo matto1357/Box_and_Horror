@@ -23,6 +23,8 @@ public class SoundManager : MonoBehaviour
 
     //サウンド1個用
     public void PlaySingle(AudioClip clip) {
+        float randPitch = Random.Range(lowPitchRange, highPitchRange);
+        efxSource.pitch = randPitch;
         efxSource.clip = clip;
         efxSource.Play();
     }

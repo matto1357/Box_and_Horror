@@ -14,6 +14,7 @@ public class Enemy2Script : MonoBehaviour
     void OnBecameInvisible() 
     {
         Debug.Log("Invisible");
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 }

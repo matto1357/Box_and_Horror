@@ -78,13 +78,13 @@ public class Player : MonoBehaviour
         if(this.transform.position.y < playerFallvalue) 
         {
             isGameOver = true;
-            //Debug.Log("gameover");
+            Debug.Log("gameover");
             //Do something here
             //落ちたら何々する
         }
 
         float dis = Vector3.Distance(enemyTrans.position, transform.position);
-        if(dis < 1.3f) 
+        if(dis < 2.0f) 
         {
             isGameOver = true;
             Debug.Log("gameover");
