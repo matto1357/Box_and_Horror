@@ -344,6 +344,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8103186193795127769, guid: fac1d41c28be1fe459e647df640a9b28,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fac1d41c28be1fe459e647df640a9b28, type: 3}
 --- !u!1 &938109515 stripped
@@ -453,7 +458,7 @@ MonoBehaviour:
   map: {fileID: 1706683941}
   player: {fileID: 1594083719}
   camera: {fileID: 1980662306}
-  enemy: {fileID: 0}
+  enemy: {fileID: 83992243}
   _r: {fileID: 1706683944}
   masuObjScale: 2
   parentObj: {fileID: 0}
@@ -609,6 +614,16 @@ PrefabInstance:
     - target: {fileID: 8103186193795127774, guid: fac1d41c28be1fe459e647df640a9b28,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103186193795127768, guid: fac1d41c28be1fe459e647df640a9b28,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103186193795127769, guid: fac1d41c28be1fe459e647df640a9b28,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -66,4 +66,9 @@ public class Enemy : MonoBehaviour
             Debug.Log("weee");
         }
     }
+
+    public void Warp(Vector3 pos)
+    {
+        agent.Warp(pos);
+    }
 }

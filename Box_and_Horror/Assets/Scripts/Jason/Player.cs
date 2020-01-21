@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public float rotationSpeed = 5.0f; //playerの曲がりの速さ
     public float playerFallvalue = -10.0f; //どこまで落ちたらgameover
 
-    public Transform[] enemyTrans;
+    public List<Transform>enemyTrans = new List<Transform>();
 
     Rigidbody rb;
     bool isGameOver = false;
@@ -107,12 +107,12 @@ public class Player : MonoBehaviour
     }
     public void GetEnemy()
     {
+        enemyTrans.Clear();
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Enemy");
-        enemyTrans = new Transform[objs.Length];
         int cnt = 0;
         foreach (GameObject trns in objs)
         {
-            enemyTrans[cnt] = trns.transform;
+            enemyTrans.Add(trns.transform);
             cnt++;
         }
     }

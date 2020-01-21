@@ -5,9 +5,11 @@ using UnityEngine;
 public class ExitPoint : MonoBehaviour
 {
     MapCreate map;
+    MapController controller;
     private void Start()
     {
         map = GameObject.Find("MapCreater").GetComponent<MapCreate>();
+        controller = GameObject.Find("MapController").GetComponent<MapController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,5 +22,6 @@ public class ExitPoint : MonoBehaviour
         }
         Debug.Log("clear");
         map.ReLoadMap(true);
+        controller.boxCnt = 0;
     }
 }

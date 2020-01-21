@@ -14,7 +14,7 @@ public class MapController : MonoBehaviour
     int pointNum;
     [SerializeField] MapCreate map;
 
-    int boxCnt;
+    [HideInInspector]public int boxCnt;
 
     [SerializeField] GameObject player;
     [SerializeField] GameObject camera;
@@ -84,6 +84,10 @@ public class MapController : MonoBehaviour
                 case -3:
                     Debug.Log(cnt);
                     Text(cnt);
+                    break;
+                case 3:
+                    Debug.Log(cnt);
+                    MoveEnemy(cnt);
                     break;
 
             }
@@ -213,6 +217,14 @@ public class MapController : MonoBehaviour
         //player.transform.LookAt(new Vector3(-size[0] / 2 * masuObjScale, player.transform.position.y, -size[1] / 2 * masuObjScale));
         //camera.transform.localRotation = player.transform.localRotation;
 
+    }
+
+    private void MoveEnemy(int cnt)
+    {
+        Debug.Log(infometionGlid[cnt] * masuObjScale);
+        //enemy.transform.localPosition = infometionGlid[cnt] * masuObjScale;
+        //ワープ関数
+        enemy.GetComponent<Enemy>().Warp(infometionGlid[cnt]*masuObjScale);
     }
 
     private void Text(int cnt)
