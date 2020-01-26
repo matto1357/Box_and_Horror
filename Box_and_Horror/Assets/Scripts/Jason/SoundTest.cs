@@ -23,7 +23,7 @@ public class SoundTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T)) 
         {
             SoundManager.sSingleton.PlaySingle(sfxSound1);
-            enemySpawn.SpawnEnemy1(spawnPosition.position);
+            enemySpawn.SpawnEnemy(spawnPosition.position ,1);
         }
 
         //Play 1 of the multiple choices

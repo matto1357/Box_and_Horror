@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MapData1
   m_EditorClassIdentifier: 
   assets: {fileID: 4900000, guid: e1a4e428f49a0a34bb5f57c3b59bca78, type: 3}
-  boxCnt: 3
+  boxCnt: 1
   enemyMax: 3

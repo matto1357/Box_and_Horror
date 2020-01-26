@@ -22,6 +22,7 @@ public class README : MonoBehaviour
     public void UpdateNav()
     {
         surface.BuildNavMesh();
+        Debug.Log("build");
     }
 
 }
