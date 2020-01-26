@@ -125,6 +125,8 @@ public class MapController : MonoBehaviour
     GameObject[] objs = new GameObject[6];
     Vector2Int[] vec2 = new Vector2Int[6];
 
+    public int[,] Glid { get => glid; set => glid = value; }
+
     public void Point()
     {
         //マウスクリックでのマップ編集
