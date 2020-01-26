@@ -145,6 +145,8 @@ public class MapCreate : MonoBehaviour
         {
             mapController.parentObj.SetActive(false);
             TextAssetReader();
+            EnemySpawn.instance.ResetEnemy();
+            
         }
     }
 

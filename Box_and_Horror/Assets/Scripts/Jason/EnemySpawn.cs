@@ -6,10 +6,20 @@ public class EnemySpawn : SingletonMonoBehaviour<EnemySpawn>
 {
     public GameObject[] enemy;
 
+
     public void SpawnEnemy(Vector3 position,int i) 
     {
-        Instantiate(enemy[i], position, Quaternion.identity);
+        Instantiate(enemy[0], position, Quaternion.identity,transform);
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetEnemy();
+    }
+
+    public void ResetEnemy()
+    {
+        foreach (Transform trns in this.transform)
+        {
+            trns.gameObject.SetActive(false);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetEnemy();
+        }
     }
 
 }
