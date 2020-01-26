@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//あとで消す
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public int boxCnt;
 
     public float movementSpeed = 5.0f; //playerの速さ
     public float rotationSpeed = 5.0f; //playerの曲がりの速さ
     public float playerFallvalue = -10.0f; //どこまで落ちたらgameover
 
-    public Transform[] enemyTrans;
+    public Transform enemyTrans;
 
     Rigidbody rb;
     bool isGameOver = false;
@@ -20,7 +17,6 @@ public class Player : MonoBehaviour
    
     void Start() 
     {
-        GetEnemy();
         rb = GetComponent<Rigidbody>();    
     }
 
@@ -85,35 +81,14 @@ public class Player : MonoBehaviour
             Debug.Log("gameover");
             //Do something here
             //落ちたら何々する
-            SceneManager.LoadScene("GameOver");
         }
 
-        float dis = 9999f;
-        foreach (Transform trns in enemyTrans)
-        {
-            if (Vector3.Distance(trns.position, transform.position) < dis)
-            {
-                dis = Vector3.Distance(trns.position, transform.position);
-            }
-        }
-        
-        if(dis < 1.3f) 
+        float dis = Vector3.Distance(enemyTrans.position, transform.position);
+        if(dis < 2.0f) 
         {
             isGameOver = true;
             Debug.Log("gameover");
             //Do something here
-            SceneManager.LoadScene("GameOver");
-        }
-    }
-    public void GetEnemy()
-    {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("Enemy");
-        enemyTrans = new Transform[objs.Length];
-        int cnt = 0;
-        foreach (GameObject trns in objs)
-        {
-            enemyTrans[cnt] = trns.transform;
-            cnt++;
         }
     }
 }
