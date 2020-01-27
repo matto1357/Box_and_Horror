@@ -76,9 +76,6 @@ public class Surfaces
             }
         }
 
-        Debug.Log("min x:" + min.x + ", y:" + min.y);
-        Debug.Log("max x:" + max.x + ", y:" + max.y);
-
         for(int i = 0; i < result.Length; i++)
         {
             Vector2Int pos = data[i];
@@ -121,5 +118,15 @@ public class Surfaces
     public Surfaces(Vector2Int[] _poses)
     {
         Poses = _poses;
+    }
+
+    public Surfaces(List<Vector2Int> _poses)
+    {
+        Vector2Int[] p = new Vector2Int[_poses.Count];
+        for(int i = 0; i < _poses.Count; i++)
+        {
+            p[i] = _poses[i];
+        }
+        Poses = p;
     }
 }

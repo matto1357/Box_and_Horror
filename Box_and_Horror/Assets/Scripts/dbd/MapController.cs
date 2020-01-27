@@ -111,10 +111,13 @@ public class MapController : MonoBehaviour
             string[] str = reader.ReadLine().Split(',');
             for (int i = 0; i < str.Length; i++)
             {
+                glid[cnt, i] = int.Parse(str[i]);
+                /*
                 if (int.Parse(str[i]) != 1)
                 {
                     glid[cnt, i] = int.Parse(str[i]);
                 }
+                //*/
                 size[1] = i+1;
             }
             cnt++;
@@ -162,6 +165,7 @@ public class MapController : MonoBehaviour
                     StartCoroutine(MapDeleteCoroutine(objs));
                     //はことった
                     EnemySpawn.instance.SpawnEnemy(new Vector3(10,1.6f,10),player.GetComponent<Player>().boxCnt);
+                    DrillFloor(vec2);
                 }
                 else
                 {
@@ -261,6 +265,14 @@ public class MapController : MonoBehaviour
     private void SetCharactorPosition()
     {
 
+    }
+
+    private void DrillFloor(Vector2Int[] poses)
+    {
+        foreach(Vector2Int pos in poses)
+        {
+            glid[pos.x, pos.y] = 1;
+        }
     }
 }
 
