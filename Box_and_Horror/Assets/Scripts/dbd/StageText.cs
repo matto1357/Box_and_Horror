@@ -5,7 +5,7 @@ using UnityEngine;
 public class StageText : MonoBehaviour
 {
     GameObject player;
-    float lookDistance = 7f;
+    float lookDistance = 4f;
     TextMesh mesh;
     string text;
     bool flag = false;
@@ -14,6 +14,7 @@ public class StageText : MonoBehaviour
         mesh = GetComponent<TextMesh>();
         text = mesh.text;
         player = GameObject.FindGameObjectWithTag("Player");
+        mesh.text = "";
     }
     // Update is called once per frame
     void FixedUpdate()

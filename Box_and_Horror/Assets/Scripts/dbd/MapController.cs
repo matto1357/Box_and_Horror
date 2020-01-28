@@ -19,6 +19,7 @@ public class MapController : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject camera;
     [SerializeField] GameObject enemy;
+    [SerializeField] ImageScript img;
     [SerializeField] README _r;
     [SerializeField]private int masuObjScale;
 
@@ -58,7 +59,7 @@ public class MapController : MonoBehaviour
             }
             lastObj = hit.transform.gameObject;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Point();
         }
@@ -71,6 +72,7 @@ public class MapController : MonoBehaviour
     }
     public void Init()
     {
+        
         bool trig = true;
         int cnt = 0;
         while (cnt < pointList.Count)
@@ -163,6 +165,7 @@ public class MapController : MonoBehaviour
                 if (judge)
                 {
                     StartCoroutine(MapDeleteCoroutine(objs));
+                    img.Function();
                     //はことった
                     EnemySpawn.instance.SpawnEnemy(new Vector3(10,1.6f,10),player.GetComponent<Player>().boxCnt);
                     DrillFloor(vec2);
@@ -214,6 +217,7 @@ public class MapController : MonoBehaviour
         objs = new GameObject[6];
         yield return new WaitForSeconds(0.1f);
         _r.UpdateNav();
+        Debug.Log(DeploymentBoxManager.instance.IsStalemateCheck(glid));
     }
 
     private void MovePlayer(int cnt)
@@ -237,12 +241,12 @@ public class MapController : MonoBehaviour
     {
         var text = new GameObject();
         text.transform.parent = parentObj.transform;
-        text.AddComponent<TextMesh>().text = "箱 * "+map.assets[0].boxCnt+"個";
-        text.GetComponent<TextMesh>().fontSize = 50;
+        text.AddComponent<TextMesh>().text = "箱 * "+map.assets[map.mapCnt].boxCnt+"個";
+        text.GetComponent<TextMesh>().fontSize = 40;
         text.AddComponent<StageText>();
         text.transform.localPosition = infometionGlid[cnt] * masuObjScale;
         Debug.Log(infometionGlid[cnt]);
-        text.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        text.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         if (infometionGlid[cnt].x ==0)
         {
             text.transform.Rotate(new Vector3(0,270,0));
