@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 
 public class MapController : MonoBehaviour
@@ -19,14 +20,18 @@ public class MapController : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject camera;
     [SerializeField] GameObject enemy;
+    [SerializeField] ImageScript img;
     [SerializeField] README _r;
     [SerializeField]private int masuObjScale;
+
+    [SerializeField] GameObject kanbann;
+    [SerializeField] Light light;
 
     public GameObject parentObj;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.visible = false;
     }
 
     [SerializeField] Material[] mat;
@@ -58,7 +63,7 @@ public class MapController : MonoBehaviour
             }
             lastObj = hit.transform.gameObject;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Point();
         }
@@ -71,6 +76,7 @@ public class MapController : MonoBehaviour
     }
     public void Init()
     {
+        light.intensity = 2;
         bool trig = true;
         int cnt = 0;
         while (cnt < pointList.Count)
@@ -89,11 +95,43 @@ public class MapController : MonoBehaviour
                     Debug.Log(cnt);
                     MoveEnemy(cnt);
                     break;
+                case 4:
+                    Tlarning(cnt);
+                    break;
 
             }
             cnt++;
         }
 
+    }
+
+    int number = 0;
+    private void Tlarning(int cnt)
+    {
+        var obj = Instantiate(kanbann, infometionGlid[cnt] * masuObjScale + new Vector3(0, -2, 0), Quaternion.identity, GameObject.Find("New Game Object").transform);
+        switch (number)
+        {
+            case 0:
+                obj.transform.LookAt(infometionGlid[cnt]*masuObjScale + new Vector3(0,0,-100));
+                obj.GetComponentInChildren<Text>().text = "右 敵 逃ゲル\nツカまル アウト"; 
+                number++;
+                break;
+            case 1:
+                obj.transform.LookAt(infometionGlid[cnt] * masuObjScale + new Vector3(100, 0, 0));
+                obj.GetComponentInChildren<Text>().text = "赤い壁 箱ノ数 見ル\n箱 足リる 黒の壁 開ク";
+                number++;
+                break;
+            case 2:
+                obj.transform.LookAt(infometionGlid[cnt] * masuObjScale + new Vector3(-100, 0, 0));
+                obj.GetComponentInChildren<Text>().text = "展開図 例 ";
+                number++;
+                break;
+            case 3:
+                obj.transform.LookAt(infometionGlid[cnt] * masuObjScale + new Vector3(-100, 0, 0));
+                obj.GetComponentInChildren<Text>().text = "E 床選ブ 展開図 \n正解 消えル 箱 アツめテ ";
+                number++;
+                break;
+        }
     }
 
 
@@ -163,6 +201,7 @@ public class MapController : MonoBehaviour
                 if (judge)
                 {
                     StartCoroutine(MapDeleteCoroutine(objs));
+                    img.Function();
                     //はことった
                     EnemySpawn.instance.SpawnEnemy(new Vector3(10,1.6f,10),player.GetComponent<Player>().boxCnt);
                     DrillFloor(vec2);
@@ -214,6 +253,7 @@ public class MapController : MonoBehaviour
         objs = new GameObject[6];
         yield return new WaitForSeconds(0.1f);
         _r.UpdateNav();
+        Debug.Log(DeploymentBoxManager.instance.IsStalemateCheck(glid));
     }
 
     private void MovePlayer(int cnt)
@@ -235,14 +275,17 @@ public class MapController : MonoBehaviour
 
     private void Text(int cnt)
     {
+        string[] boxMessege = { "この部屋を出るには" + map.assets[map.mapCnt].boxCnt + "個の箱が必要だ...",
+                                "命繋ぐカギは" + map.assets[map.mapCnt].boxCnt + "個の箱...",
+                                 map.assets[map.mapCnt].boxCnt + "つの箱が次なる扉を開く..." };
         var text = new GameObject();
         text.transform.parent = parentObj.transform;
-        text.AddComponent<TextMesh>().text = "箱 * "+map.assets[0].boxCnt+"個";
-        text.GetComponent<TextMesh>().fontSize = 50;
+        text.AddComponent<TextMesh>().text = boxMessege[Random.Range(0, 3)];
+        text.GetComponent<TextMesh>().fontSize = 40;
         text.AddComponent<StageText>();
         text.transform.localPosition = infometionGlid[cnt] * masuObjScale;
         Debug.Log(infometionGlid[cnt]);
-        text.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        text.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         if (infometionGlid[cnt].x ==0)
         {
             text.transform.Rotate(new Vector3(0,270,0));

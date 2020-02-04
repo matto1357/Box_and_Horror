@@ -39,6 +39,12 @@ public class ImageScript : MonoBehaviour
         }
     }
 
+    public void Function()
+    {
+        StartCoroutine(PopImageInOut(rawImage[RandomImage()], appearanceTime));
+        isCollectedBox = true;
+    }
+
     void Timer(float val) 
     {
         timer += Time.deltaTime;
@@ -48,7 +54,7 @@ public class ImageScript : MonoBehaviour
             temp = RandomTimer(minRandTimer, maxRandTimer);
             timer = 0f;
         }
-        Debug.Log(timer + "  " + val);
+        //Debug.Log(timer + "  " + val);
     }
 
 
