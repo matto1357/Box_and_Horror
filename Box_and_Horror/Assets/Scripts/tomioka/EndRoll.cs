@@ -13,6 +13,9 @@ public class EndRoll : MonoBehaviour
     [SerializeField]
     Text text;
 
+    [SerializeField]
+    private float time;
+
     private void Awake()
     {
         //xは画面の解像度の半分、yはテキストのサイズと解像度の高さ分
@@ -28,7 +31,11 @@ public class EndRoll : MonoBehaviour
         }
         else
         {
-            GameSceneManager.GameStart();
+            time -= Time.deltaTime;
+            if (time < 0)
+            {
+                GameSceneManager.GameStart();
+            }
         }
 
     }
