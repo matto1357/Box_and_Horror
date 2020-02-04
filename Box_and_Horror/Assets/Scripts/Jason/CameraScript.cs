@@ -17,5 +17,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         this.transform.position = player.transform.position;//これでいいみたい
+
+        GetComponentInChildren<Light>().intensity -= 0.02f * Time.deltaTime;
     }
 }

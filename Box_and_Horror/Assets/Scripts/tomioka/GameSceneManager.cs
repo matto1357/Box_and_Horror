@@ -27,8 +27,8 @@ public class GameSceneManager : MonoBehaviour
     }
 
     public static void GameStart()
-    {
-        //スタートシーンへ飛ぶ
+    {        //スタートシーンへ飛ぶ
+        Cursor.visible = true;
         SceneManager.LoadScene("GameStart");
     }
 

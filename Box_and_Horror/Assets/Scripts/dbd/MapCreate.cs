@@ -101,6 +101,15 @@ public class MapCreate : MonoBehaviour
                 mapController.infometionGlid.Add(new Vector3(nums[0],1, nums[1]));
                 mapController.pointList.Add(num);
                 break;
+            case 4:
+                mapController.infometionGlid.Add(new Vector3(nums[0], 1, nums[1]));
+                mapController.pointList.Add(num);
+                break;
+            case 5:
+                obj.GetComponent<MeshRenderer>().material.color = new Color(1,0,0);
+                obj.AddComponent<BoxCollider>().center = new Vector3(0,10,0);
+                obj.AddComponent<BoxCollider>().size = new Vector3(1, 10, 1);
+                break;
             case -1:
                 obj.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
                 obj.transform.localScale += new Vector3(0,10,0);
@@ -138,6 +147,7 @@ public class MapCreate : MonoBehaviour
         if (trig)mapCnt++;
         if (mapCnt >= assets.Length)
         {
+            Cursor.visible = true;
             SceneManager.LoadScene("GameClear");
         }
         else

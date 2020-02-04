@@ -85,6 +85,7 @@ public class Player : MonoBehaviour
             Debug.Log("gameover");
             //Do something here
             //落ちたら何々する
+            Cursor.visible = true;
             SceneManager.LoadScene("GameOver");
         }
 
@@ -101,6 +102,7 @@ public class Player : MonoBehaviour
         {
             isGameOver = true;
             Debug.Log("gameover");
+            Cursor.visible = true;
             //Do something here
             SceneManager.LoadScene("GameOver");
         }
