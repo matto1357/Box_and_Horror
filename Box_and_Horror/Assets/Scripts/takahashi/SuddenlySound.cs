@@ -8,7 +8,7 @@ public class SuddenlySound : MonoBehaviour
     AudioClip[] audioClip;
     AudioSource audioSource;
 
-    int timeManagement = 5;
+    int timeManagement = 6;
     float timeUP;
     [SerializeField]
     int maxInterval;
@@ -35,7 +35,7 @@ public class SuddenlySound : MonoBehaviour
 
     private void suddenly()
     {
-        int soundNum = Random.Range(0, 4);
+        int soundNum = Random.Range(0, 6);
         audioSource.clip = audioClip[soundNum];
         audioSource.Play();
     }
